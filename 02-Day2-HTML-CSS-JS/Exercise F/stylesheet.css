@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+header{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(./img/flowershop.jpg);
+    background-size: cover;
+    height: 100vh;  
+}
+
+
+.flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 800px
+    
+}
+
+
+.flex h1{
+    color: #fff;
+    font-size: 350%;
+    font-family: sans-serif;
+    
+
+}
+
+ .btn{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 10px 30px;
+    background-color: rgb(96, 187, 6);
+    border-radius: 50px;
+    margin-top: 30px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+
+.container-row-1{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(136, 175, 97);
+    
+}
+
+.container-row-2{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(136, 175, 97);
+    
+}
+
+
+
+.container-1{    
+    padding: 80px 60px;
+    display: flex;
+    width: 50vh;
+}
+
+.container-1 p{    
+    color: rgb(122, 122, 122);
+    font-weight: bold;
+    font-size: 150%;
+}
+
+.container-2{
+    padding: 80px 80px;
+    display: flex;
+    width: 50vh;
+}
+
+.container-2 p{    
+    color: rgb(122, 122, 122);
+    font-weight: bold;
+    font-size: 150%;
+}
+
+
+/*---------------------------
+*@Media
+------------------------------*/
+@media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+  }
+
+
+
