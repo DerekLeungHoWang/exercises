@@ -1,0 +1,16 @@
+{
+  "name": "21-packagejsonfile",
+  "version": "1.0.0",
+  "description": "undefinedLorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam finibus enim rutrum malesuada malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec mollis malesuada sem, at rhoncus risus commodo non. Vestibulum vitae arcu tincidunt nisi posuere laoreet. Pellentesque ut enim urna. Proin at venenatis ante. Suspendisse ullamcorper justo a justo rutrum, in aliquet risus maximus. In lacinia euismod neque sed tincidunt. Phasellus massa sem, gravida ut tincidunt non, aliquet in felis. Etiam id turpis sed ex laoreet molestie. Proin nunc tellus, scelerisque quis ornare interdum, luctus maximus sem. In tincidunt pretium lobortis. Maecenas facilisis vel nisi eget bibendum. Vestibulum nunc nunc, scelerisque eu purus et, tempus pellentesque sapien. Mauris accumsan iaculis enim, in sodales dui. Suspendisse id aliquam dolor.",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
