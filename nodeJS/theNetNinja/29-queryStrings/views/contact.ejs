@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{background: skyblue; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #fff; padding: 30px;}
+        h1{font-size: 48px; text-transform: uppercase; letter-spacing: 2px; text-align: center;}
+        p{font-size: 16px;text-align: center;}
+        form{width: 400px; max-width: 100%; padding: 20px; margin: 20px auto;}
+input{display: block; margin: 10px 0; padding: 10px; width: 100%;}
+input[type='submit']{width: auto;}
+    </style>
+</head>
+<body>
+    <%- include ('partials/nav'); %>
+    <h1>Contact US</h1>
+    <p>Contact the coolest cats on the web right here</p>
+    <p><%= qs.Dept %></p>
+    <p><%= qs.person %></p>
+
+    <form id="contact-form">
+        <label for="who">who do you want to contadt?</label>
+        <input type="text" name="who" value="<%= qs.person %>"><br>
+        <label for="department">Which department?</label>
+        <input type="text" name="department" value="<%= qs.Dept %>">><br>
+        <label for="email">Your email</label>
+        <input type="email" name="email"/><br>
+        <input type="submit" value="submit"/>
+    </form>
+</body>
+</html>

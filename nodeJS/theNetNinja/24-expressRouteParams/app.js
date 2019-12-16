@@ -14,8 +14,6 @@ app.get('/profile/:name', function(req,res){
   res.send('You requested to see a profile with the name of ' + req.params.name)
 });
 
-
-
 app.listen(8080);
 //GET, what we make when we type url into an address bar
 //POST, when we post some data from web from
