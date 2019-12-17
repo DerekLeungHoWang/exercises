@@ -14,7 +14,6 @@ let caches = {};
 const uploadDirectory = __dirname  + path.sep + '/uploaded';
 
 app.get('/', function(req,res){
-    // res.send('this is the homepage');
     res.sendFile(__dirname + '/index.html');
 });
 
@@ -26,7 +25,7 @@ function writeFile(file,data){
             if(err){
                 return reject(err)
             }else {
-                resolve(data)
+                resolve(file)
                 
             }
         })
@@ -54,13 +53,13 @@ app.post('/uploaded', (req,res)=>{
         let file = req.files.upload[i].name;
         let data = req.files.upload[i].data;
         caches[file] = writeFile(file, data)
-        console.log(caches[file]);
+        console.log("caches in index.js === "+caches[file]);
 
         caches[file]
         .then(()=> {
             console.log("you have submiited a file");
             res.send("you have succesfully uploaded a file, download your file at url: localhost:8080/uploaded/:file-name'))")
-          }).catch((e)=> res.status(500).send(e.message));
+          }).catch((e)=> console.log(e))
        }
        
    } else{
@@ -71,7 +70,9 @@ app.post('/uploaded', (req,res)=>{
     .then(()=> {
         console.log("you have submiited a file");
         res.send("you have succesfully uploaded a file, download your file at url: localhost:8080/uploaded/:file-name'))")
-      }).catch((e)=> res.status(500).send(e.message));
+      }).catch((e)=> console.log(e))
+      
+      //res.status(500).send(e.message));
    }
     
     // res.send("you have uploaded the file")
