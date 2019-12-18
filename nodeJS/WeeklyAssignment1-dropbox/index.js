@@ -1,5 +1,5 @@
 var express = require('express');
-const multer = require('multer');
+
 var bodyParser = require('body-parser');
 var app = express();
 var fs = require('fs');
@@ -52,6 +52,8 @@ app.post('/uploaded', (req,res)=>{
        for(var i = 0; i < req.files.upload.length; i++){
         let file = req.files.upload[i].name;
         let data = req.files.upload[i].data;
+       
+        
         caches[file] = writeFile(file, data)
         console.log("caches in index.js === "+caches[file]);
 
@@ -65,11 +67,16 @@ app.post('/uploaded', (req,res)=>{
    } else{
     let file = req.files.upload.name;
     let data = req.files.upload.data;
+    
+    console.log("cahces[file]===============>>>");
+        
+    console.log(caches[file]);
     caches[file] = writeFile(file, data);
+    console.log(caches[file]);
     caches[file]
     .then(()=> {
         console.log("you have submiited a file");
-        res.send("you have succesfully uploaded a file, download your file at url: localhost:8080/uploaded/:file-name'))")
+        res.send(`you have ${file} succesfully uploaded a file, download your file at url: localhost:8080/uploaded/:file-name`)
       }).catch((e)=> console.log(e))
       
       //res.status(500).send(e.message));

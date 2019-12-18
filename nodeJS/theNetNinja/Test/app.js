@@ -19,7 +19,6 @@ app.get('/:user', (req,res)=>{
 
 app.post('/api/message', (req, res)=>{
 
-    console.log(req.body)
     console.log(req.body.message);
     res.send(req.body.message); 
 });
