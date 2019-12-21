@@ -1,0 +1,17 @@
+
+<h1>we have the following pizzas</h1>
+<div class="row">
+  {{#each pizzas}}
+  <div class="col-sm-3">
+  <h3>Name:</h3>
+    {{name}}
+  <h3>Price:</h3>
+  {{price}}
+  <h3>Size:</h3>
+  {{size}}
+  <br/>
+    </div>
+  {{/each}}
+</div>
+​
+<a class="btn btn-danger" href="/gallery">Gallery</a>
