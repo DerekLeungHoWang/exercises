@@ -54,8 +54,12 @@ const pizzaMenu ={
             "name":"Veggie",
             "price":"$hkd 88",
             "size":"18 inch"
-        }
-
+        },
+        {
+          "name":"Veggie",
+          "price":"$hkd 88",
+          "size":"18 inch"
+      }
     ]
 };
 
@@ -82,6 +86,6 @@ app.get("/logout", function(req, res) {
   return res.sendStatus(401);
 });
 
-app.listen(8080, () => {
-  console.log("Application listening to port 8080");
+app.listen(5000, () => {
+  console.log("Application listening to port 5000");
 });

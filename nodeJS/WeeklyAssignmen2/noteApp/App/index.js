@@ -10,7 +10,6 @@ app.engine('handlebars', hb({defaultLayout:'main'}));
 app.set('view engine','handlebars')
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
-
 //Router
 const NoteRouter = require('./routers/NoteRouter');
 //Service
@@ -19,9 +18,6 @@ const noteService = new NoteService(__dirname + '/stores/notes.json');
 app.use('/', express.static('public'))
 //GET data from api
 app.use('/api/notes', new NoteRouter(noteService).router());
-
-
-
 
 // Render html
 app.get('/',(req,res)=>{
@@ -55,4 +51,5 @@ app.get('/',(req,res)=>{
 //     res.json('Okay new note inserted')
 // })
 
-app.listen(8080);
+app.listen(8080, ()=> console.log("listening at port 8080")
+);

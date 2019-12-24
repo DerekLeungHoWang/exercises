@@ -16,9 +16,4 @@ const informMe =(endpoint,value)=>{
 
 }
 
-
-
-
-
-
 informMe("name", "germany")

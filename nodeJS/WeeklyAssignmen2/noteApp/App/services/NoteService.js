@@ -40,16 +40,52 @@ class NoteService {
                     reject(err);
                     return;
                 })
-                resolve('Success')
+                resolve('Success?')
             })
         })
     }
     removeNote(index) {
-        this.notes.splice(index, 1)
+        console.log("Line 48: removeNote, NoteService.js");
+        console.log(this.notes);
+        return new Promise((resolve,reject)=>{
+            console.log("Line 52");
+            this.notes.splice(index, 1)
+            console.log("LINE 54, After splice");
+            console.log(this.notes);
+            fs.writeFile(this.filename, JSON.stringify(this.notes), (err) => {
+                reject(err);
+                // return;
+            if(err){
+                reject(err)
+            } else{
+                console.log('resolved <==== success')
+
+                resolve("successfully deleted")
+            }  
+       
+    })           
+      })   
+        
     }
 
     insertNote(index, note) {
-        this.notes.splice(index, 0, note)
+        return new Promise((resolve,reject)=>{
+            console.log("Line 72");
+            
+            this.notes.splice(index, 0, note)
+            console.log("LINE 76 PUT, After splice");
+            console.log(this.notes);
+
+            fs.writeFile(this.filename, JSON.stringify(this.notes) , (err)=>{
+                if(err){
+                    reject(err)
+                } else{
+                    resolve("The note has been inserted")
+                }
+            })       
+        })
+        
+
     }
 
 }

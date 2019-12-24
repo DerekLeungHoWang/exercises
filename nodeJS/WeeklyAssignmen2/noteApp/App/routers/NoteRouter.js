@@ -7,8 +7,10 @@ class NoteRouter{
     }
 
     router(){  
-        router.get("/",this.get.bind(this))
+        router.get("/",this.get.bind(this));
         router.post('/', this.post.bind(this));
+        router.delete('/:id', this.delete.bind(this));
+        router.put('/:id', this.put.bind(this));
         return router
     }
 
@@ -21,19 +23,41 @@ class NoteRouter{
         console.log("Line21, NoeRouters activating");
         console.log(req.body.content);
         let noteBody = req.body.content
-        
+
         return this.noteService.addNote(noteBody)
-        .then((data)=>res.json(data))
+        .then((data)=> {
+            this.noteService.listNote().then((data)=>{
+                console.log(data,"Line30 in RouterJS")
+                res.json(data)
+            })
+        }) //
         .catch((err)=>res.status(500).json(err));
     }
 
-    // put(req,res){
-    
-    // }
+    put(req,res){
+        console.log("line 32, noteservice.js");
+        return this.noteService.insertNote(req.params.id, req.body.content)
+        .then((data)=>{
+            this.noteService.listNote().then((data)=>{
+                console.log(data, "LINE42 in routerJS");
+                res.json(data)
+            })
+        })
+        .catch((err)=>res.status(500).json(err));
+    }
 
-    // delete(req,res){
-    
-    // }
+    delete(req,res){
+        console.log("Line 35 in delete router, delete activating==============<><>");
+        console.log(req.body);
+        console.log(req.params);
+        console.log(req.params.id); 
+        return this.noteService.removeNote(req.params.id)
+        .then((data)=>{
+            console.log('resolved')
+            console.log(data, "<===== router")
+            res.json(data)}) //
+        .catch((err)=>res.status(500).json(err));
+    }
 }
     
 module.exports = NoteRouter
