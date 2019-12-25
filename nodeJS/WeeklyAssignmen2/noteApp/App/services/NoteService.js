@@ -1,92 +1,103 @@
 const fs = require('fs');
 
-class NoteService {
-    constructor(file) {
-        this.filename = file;
-        this.notes = [];
-        this.listNotePromise = this.listNote();
+class NoteService{
+    constructor(file){  //pass notes.json as argument
+        this.file = file; //this.file = file from notes.json
+        this.initPromise = null //assuming null in the beginning
+        this.init()  //set up function for a better structure
     }
-    listNote() {
-        console.log("Line 10:using listnote() in noteservice.js");
-        
-        return new Promise( (resolve, reject) => {
-            fs.readFile(this.filename, 'utf-8',  (err, data) => {
-                console.log("Line 14:using addNote() in noteservice.js");
-                console.log(this.filename);
-                console.log(data);
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                this.notes = JSON.parse(data);
-                console.log("Line21:JSON.parse(data)");
-                console.log(typeof this.notes);
-                console.log(this.notes + " <======= service")
-                resolve(this.notes);
-            });
-        });
-    };
-
-    addNote(note) {
-       
-        console.log("Line 26:using addNote() in noteservice.js");
-        return new Promise((resolve, reject) => {
-        console.log("Line 33:using addNote() in noteservice.js");
-            this.listNotePromise.then(() => {
-        console.log("Line 35:using addNote() in noteservice.js");     
-        console.log(note); 
-                this.notes.push(note);
-                fs.writeFile(this.filename, JSON.stringify(this.notes), (err) => {
-                    reject(err);
-                    return;
+    init(){
+        if(this.initPromise === null){
+            this.initPromise = new Promise((resolve,reject)=>{
+                this.read()
+                .then(()=>{
+                    resolve();
                 })
-                resolve('Success?')
+                .catch(()=>{
+                    this.notes ={};
+                    this.write()
+                        .then(resolve)
+                        .catch(reject)
+                })
+            })
+        }
+        return this.initPromise;
+    }
+
+    read(){
+        return new Promise((resolve,reject)=>{
+            fs.readFile(this.file,'utf-8',(err,data)=>{
+                if(err){
+                    reject(err)
+                }
+                try{
+                    this.notes = JSON.parse(data) //convert json to javascript
+                } catch(e){
+                    return reject(e)
+                }
+                return resolve(this.notes)
             })
         })
     }
-    removeNote(index) {
-        console.log("Line 48: removeNote, NoteService.js");
-        console.log(this.notes);
+
+
+    write(){
         return new Promise((resolve,reject)=>{
-            console.log("Line 52");
-            this.notes.splice(index, 1)
-            console.log("LINE 54, After splice");
-            console.log(this.notes);
-            fs.writeFile(this.filename, JSON.stringify(this.notes), (err) => {
-                reject(err);
-                // return;
-            if(err){
-                reject(err)
-            } else{
-                console.log('resolved <==== success')
-
-                resolve("successfully deleted")
-            }  
-       
-    })           
-      })   
-        
-    }
-
-    insertNote(index, note) {
-        return new Promise((resolve,reject)=>{
-            console.log("Line 72");
-            
-            this.notes.splice(index, 0, note)
-            console.log("LINE 76 PUT, After splice");
-            console.log(this.notes);
-
-            fs.writeFile(this.filename, JSON.stringify(this.notes) , (err)=>{
+            fs.writeFile(this.file, JSON.stringify(this.notes),(err)=>{
                 if(err){
-                    reject(err)
-                } else{
-                    resolve("The note has been inserted")
+                    return reject(err);
                 }
-            })       
+                resolve(this.notes);
+            })
         })
-        
-
     }
+
+    list(user){
+        if(typeof user !== 'undefined'){
+            return this.init() //just checks to see if it has run once. 
+                .then(()=> {
+                    return this.read()
+                })
+                .then(()=>{
+                    if(typeof this.notes[user] === 'undefined'){
+                        return [];
+                    } else {
+
+                        return this.notes[user];
+                    }
+                });
+        } else {
+             return this.init().then(()=>{
+                return this.read();
+            });
+        }
+    };
+
+    add(note, user){
+        return this.init().then(() => {
+            if(typeof this.notes[user] === 'undefined'){
+                this.notes[user] = [];
+         }
+            this.notes[user].push(note);
+            return this.write();
+        });
+    };
+
+    remove(index, user){
+        return this.init().then(()=>{
+            if(typeof this.notes[user] === 'undefined'){
+                throw new Error("Cannot remove a note, if the user doesn't exist");
+            }
+            if(this.notes[user].length <= index){
+                throw new Error("Cannot remove a note that doesn't exist");
+            }
+        return this.read().then(()=>{
+            this.notes[user].splice(index, 1);
+            return this.write()
+        });
+        });
+    }
+
 
 }
 

@@ -15,7 +15,9 @@ class NoteRouter{
     }
 
     get(req,res){
-        return this.noteService.listNote()
+        console.log(req.auth.user,"LINE 18 router router .js <<<<>>>");
+        
+        return this.noteService.list(req.auth.user)
         .then((data)=>res.json(data))
         .catch((err)=>res.status(500).json(err));
     }
@@ -24,9 +26,9 @@ class NoteRouter{
         console.log(req.body.content);
         let noteBody = req.body.content
 
-        return this.noteService.addNote(noteBody)
+        return this.noteService.add(noteBody,req.auth.user)
         .then((data)=> {
-            this.noteService.listNote().then((data)=>{
+            this.noteService.list(req.auth.user).then((data)=>{
                 console.log(data,"Line30 in RouterJS")
                 res.json(data)
             })
@@ -51,13 +53,15 @@ class NoteRouter{
         console.log(req.body);
         console.log(req.params);
         console.log(req.params.id); 
-        return this.noteService.removeNote(req.params.id)
+        return this.noteService.remove(req.params.id, req.auth.user)
+        .then(() => this.noteService.list(req.auth.user))
         .then((data)=>{
             console.log('resolved')
             console.log(data, "<===== router")
             res.json(data)}) //
         .catch((err)=>res.status(500).json(err));
     }
+   
 }
     
 module.exports = NoteRouter
