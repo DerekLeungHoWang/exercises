@@ -41,6 +41,6 @@ app.get('/',(req,res)=>{
     res.render("index");
 })
 
-app.listen(config.port, ()=> console.log(`app listening at port ${config.port}`)
+app.listen(config.port, ()=> console.log(`Note Taking APP listening at port ${config.port}`)
 );
 module.exports = app;

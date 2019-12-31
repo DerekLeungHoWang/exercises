@@ -36,17 +36,12 @@ class NoteRouter{
         .catch((err)=>res.status(500).json(err));
     }
 
-    put(req,res){
-        console.log("line 32, noteservice.js");
-        return this.noteService.insertNote(req.params.id, req.body.content)
-        .then((data)=>{
-            this.noteService.listNote().then((data)=>{
-                console.log(data, "LINE42 in routerJS");
-                res.json(data)
-            })
-        })
-        .catch((err)=>res.status(500).json(err));
-    }
+    put(req, res) {
+        return this.noteService.update(req.params.id, req.body.note, req.auth.user) // The noteService fires the update command, this will update our note (and our JSON file)
+            .then(() => this.noteService.list(req.auth.user)) // Then we fire list note from the same noteService which returns the array of notes for that user. 
+            .then((notes) => res.json(notes)) // Then we respond to the request with all of our notes in the JSON format back to our clients browser. 
+            .catch((err) => res.status(500).json(err));
+    };
 
     delete(req,res){
         console.log("Line 35 in delete router, delete activating==============<><>");

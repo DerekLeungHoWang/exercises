@@ -1,0 +1,26 @@
+<h2>Welcome to the contact page</h2>
+{{! this = every single item}}
+{{#each people as |value key|}}
+
+<p>{{key}}:{{value}}</p>
+
+
+{{/each}}
+
+
+{{!this refers to every single value}}
+{{#each user}}
+
+<p>{{@index}} : {{this}}</p>
+
+{{/each}}
+{{! log is a built in keyword}}
+{{#each lists}}
+
+{{#each this.items as |yValue yKey|}}
+
+<p> {{yValue}}</p>
+
+{{/each}}
+<hr>
+{{/each}}

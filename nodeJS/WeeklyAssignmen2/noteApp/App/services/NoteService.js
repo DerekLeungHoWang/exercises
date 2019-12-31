@@ -82,6 +82,19 @@ class NoteService{
             return this.write();
         });
     };
+    
+    update(index, note, user){
+        return this.init().then(()=>{
+            if(typeof this.notes[user] === 'undefined'){
+                throw new Error("Cannot update a note, if the user doesn't exist");
+            }
+            if(this.notes[user].length <= index ){
+                throw new Error("Cannot update a note that doesn't exist");
+            }
+            this.notes[user][index] = note
+            return this.write();
+        });
+    }
 
     remove(index, user){
         return this.init().then(()=>{
@@ -97,6 +110,7 @@ class NoteService{
         });
         });
     }
+
 
 
 }

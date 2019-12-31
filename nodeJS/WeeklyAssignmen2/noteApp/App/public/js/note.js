@@ -1,13 +1,16 @@
 /*=====================================*/
 /*---------handlebars compile------------*/
 /*=====================================*/
+
+// {{key}} and {{index}} are the same, {{this}} is every single item in the array
+//
 var notesTemplate = Handlebars.compile(
     `
     {{#each notes}}
     <div class="note">
-        <span class="input"><textarea data-id="{{ @index }}"> {{ this }}</textarea></span>
+        <span class="input"><textarea data-id="{{ @key }}"> {{ this }}</textarea></span>
 
-        <button class="remove btn btn-xs" data-id="{{ @index }}"><i class = "fa fa-trash" aria-hidden="true"></i></button>
+        <button class="remove btn btn-xs" data-id="{{ @key }}"><i class = "fa fa-trash" aria-hidden="true"></i></button>
         </div>
         {{/each}}
     `
@@ -94,7 +97,20 @@ console.log($(event.currentTarget).data('id'))
     });
 });
 
+$('#notes').on('blur', 'textarea', (event)=>{
+  beginSaving(event.currentTarget);
 
+// Then we sent out our put request using the data-id property on our targeted text area, we send the value of this text area within the body and we end the saving message on the dom. We then reload all of our notes with updated information we received from our server.
+  axios.put('/api/notes/' + $(event.currentTarget).data('id'), {
+      note: $(event.currentTarget).val()
+  }).then((res)=>{
+      endSaving(event.currentTarget);
+      reloadNotes(res.data);
+  }).catch((e)=>{
+      endSaving(event.currentTarget);
+      alert(e);
+  });
+});
 
 
 
