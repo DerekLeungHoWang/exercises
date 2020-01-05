@@ -18,7 +18,7 @@ var notesTemplate = Handlebars.compile(
 
 const reloadNotes = (notes) => {
   console.log(notes,"line14 notes. js");
-  $("#notes").html(notesTemplate({ notes: notes })); //1st notes is res.data
+  $("#notes").html(notesTemplate({ notes: notes }));
 };
 
 const beginSaving = (target) => {

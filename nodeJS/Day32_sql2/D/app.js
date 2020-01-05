@@ -21,11 +21,7 @@ async function commands() {
     let rows = [];
     inputStream.pipe(CSVReadableStream({ parseNumbers: true, parseBooleans: true, trim: true }))
         .on('data', async (row) => {
-
-
             rows.push(row);
-
-
         })
         .on('end', async (data) => {
             await client.query('BEGIN TRANSACTION ISOLATION LEVEL Serializable;');
