@@ -12,7 +12,8 @@ const basicAuth = require('express-basic-auth');
 //template engine
 app.engine("handlebars", hbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-const config = require('./stores/config.json')['development']
+
+const config = require('./stores/config.json')['development'];
 //body-parser
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -30,25 +31,22 @@ app.use(basicAuth({
 
 //routing
 const orderService = new OrderService(path.join(__dirname, config.orders));
+console.log("LINE34, app.js");
+console.log(path.join(__dirname, config.orders));
 app.use('/api/orders', new OrderRouter(orderService).router());
 
 app.get('/',(req,res)=>{
-    res.render("index");
+    res.render("pizzaIndex");
 })
 
 app.get('/cart',(req,res)=>{
     res.render("cart");
 })
-// app.get("/", (req, res) => {
-    
-//     res.render("index")
-//   });
 
-// app.get("/cart",(req, res)=>{
-//     res.render("cart")
-// })
+app.post('/')
 
-app.listen(8080, ()=> console.log('listening at 8080')
+
+app.listen(config.port, ()=> console.log('listening at 8080')
 )
 
 module.exports = app;

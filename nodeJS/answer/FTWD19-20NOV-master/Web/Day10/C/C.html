@@ -1,0 +1,57 @@
+<html>
+<head>
+</head>
+<body>
+
+  <header>
+  </header>
+
+  <footer>
+  </footer>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  <script type='text/javascript'>
+
+  // log the beginning time once
+
+  var initialTime = Math.floor(Date.now()/1000);
+  var elapsedTime = 0;
+  var message;
+
+  // Own created Timeout Function takes 2 parameters:
+  // callback and time (in seconds)
+
+  function ownSetTimeout(callback, time) {
+
+    // log every second, calculate elapsed time in seconds
+    while (elapsedTime != time) {
+      finalTime = Math.floor(Date.now()/1000);
+      elapsedTime = finalTime - initialTime;
+      console.log(elapsedTime, finalTime, initialTime, time);
+    }
+    // if elasped time same value as given time period,
+    // execute the callback:
+    callback(arguments[0].name, arguments[1]);
+
+    clearInterval(ownSetTimeout);
+  }
+
+  // ====================================
+  // Callback function as follows:
+
+
+  function boom(arg1, arg2) {
+    alert(`The callback function ${arg1} is done in ${arg2} seconds!`);
+  }
+
+  // ====================================
+  // The custom created timeout function:
+  ownSetTimeout(boom, 3);
+
+
+
+  // compared to original Function:
+  // setTimeout(boom, 3000);
+
+  </script>
+</body>
+</html>
