@@ -11,6 +11,10 @@ const NoteService = require('./services/NoteService');
 const path = require('path');
 const hb = require('express-handlebars');
 
+//knex setup
+const knexConfig = require('./knexfile').development;
+const knex = require('knex')(knexConfig)
+
 // middlewares
 app.engine('handlebars', hb({defaultLayout:'main'}));
 app.set('view engine','handlebars')
@@ -26,10 +30,10 @@ app.use('/', express.static('public'))
 
 //Use basic auth
 app.use(basicAuth({
-    authorizer: AuthChallenger(JSON.parse(fs.readFileSync(path.join(__dirname, config.users)))), // we are defining the file where our users exist with this code: JSON.parse(fs.readFileSync(path.join(__dirname, config.users))), we also parse the data so that we can iterate over each user like a JavaScript variable/ object. 
+    authorizer: AuthChallenger(knex),
     challenge: true,
-    realm: 'Note Taking Application',
-
+    authorizeAsync: true,
+    realm: 'Note Taking Application With Knex'
 }));
 
 

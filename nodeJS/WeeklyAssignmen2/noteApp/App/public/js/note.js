@@ -7,6 +7,7 @@
 var notesTemplate = Handlebars.compile(
     `
     {{#each notes}}
+  
     <div class="note">
         <span class="input"><textarea data-id="{{ @key }}"> {{ this }}</textarea></span>
 

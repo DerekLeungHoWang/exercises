@@ -8,6 +8,9 @@ const OrderRouter = require('./routers/OrderRouter')
 const bodyParser = require('body-parser')
 const AuthChallenger = require('./AuthChallenger.js')
 const basicAuth = require('express-basic-auth');
+//require KNEX
+const knexConfig = require('./knexfile').development;
+const knex = require('knex')(knexConfig)
 
 //template engine
 app.engine("handlebars", hbs({ defaultLayout: "main" }));
@@ -41,6 +44,10 @@ app.get('/',(req,res)=>{
 
 app.get('/cart',(req,res)=>{
     res.render("cart");
+})
+
+app.get('/contact',(req,res)=>{
+    res.render("contact");
 })
 
 app.post('/')
