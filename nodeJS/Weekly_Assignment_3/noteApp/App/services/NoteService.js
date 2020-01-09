@@ -32,7 +32,7 @@ class NoteService{
             let query = this.knex.select('notes.id', 'notes.content')
                 .from('notes')
                 .innerJoin('users', 'notes.user_id', 'users.id')
-                .where('users.username', user)
+                .where('users.username', user) //user is the argument
                 .orderBy('notes.id', 'asc')
                 //what is asc
                 return query.then((rows)=>{

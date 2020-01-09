@@ -6,7 +6,7 @@
 //
 var notesTemplate = Handlebars.compile(
     `
-    {{#each notes}}
+    {{#each someNotes}}
   
     <div class="note">
         <span class="input"><textarea data-id="{{id}}"> {{ content }}</textarea></span>
@@ -17,9 +17,9 @@ var notesTemplate = Handlebars.compile(
     `
 );
 
-const reloadNotes = (notes) => {
+const reloadNotes = (RESDATA) => {
   console.log(notes,"line14 notes. js");
-  $("#notes").html(notesTemplate({ notes: notes }));
+  $("#notes").html(notesTemplate({ someNotes: RESDATA }));
 };
 
 const beginSaving = (target) => {
@@ -43,7 +43,7 @@ $(() => {
   axios
     .get("/api/notes")
     .then(res => {
-      console.log(`Getting notes: ${res.data}`);
+      console.log('getting notes noterservice js line 46', res.data);
       reloadNotes(res.data);
     })
     .catch((err) => {

@@ -1,7 +1,7 @@
 
 var ordersTemplate = Handlebars.compile(
   `
-  {{#each orders }}
+  {{#each someOrders }}
   
   <div class="cart-area">
     <div class="container">
@@ -12,10 +12,10 @@ var ordersTemplate = Handlebars.compile(
                         <tr>
                         
                             <td class="cart_product_img d-flex align-items-center">
-                            <h5>productID: {{@index}}</h6>
+                            <h5>productID: {{id}}</h6>
                             <span> &nbsp; &nbsp;</span>
-                            <a href="#"><img src="img/2.jpg" alt="Product"></a>
-                            <h6>{{this.orders}} </h6>
+                            <a href="#"><img src="img/cartPizza1.jpg" alt="Product"></a>
+                            <h6>{{content}} </h6>
                                 
                             </td>
                             <td class="price"><span>{{price}}</span></td>
@@ -47,19 +47,22 @@ var ordersTemplate = Handlebars.compile(
   `
 );
 
-const reloadOrders = (orders) => {
+const reloadOrders = (RESDATA) => { //orders = res.data
   console.log("line15 controller. js");
-  console.log(orders)
+  console.log(RESDATA[0].id)
+  console.log(RESDATA[0].content)
 
-  let arr = []
-  for(let i = 0; i< orders.length; i++){
-  arr.push({orders:orders[0], price:'$50'})
-}
-console.log(arr)
+  // let arr = []
+  // for(let i = 0; i< orders.length; i++){
+  // arr.push({orders:orders[0], price:'$50'})
   $("#orders").html(ordersTemplate({ 
-    orders: arr ,
-  }));  
-};
+    someOrders:RESDATA
+    
+  })); 
+}
+// console.log(arr)
+   
+// };
 
 $(document).ready(function () {
 
@@ -89,7 +92,7 @@ $(document).ready(function () {
     .get("/api/orders/")
     .then(res => {
       console.log("LINE 52 controller.js");
-      console.log(`===========================Getting notes: ${res.data}`); 
+      console.log('getting orders(RES.DATA) line 92 controllerJS', res.data); 
       reloadOrders(res.data)
     })
     .catch((err) => {

@@ -18,7 +18,7 @@ class OrderRouter{
         
         return this.orderService.list(req.auth.user)
         .then((data)=>
-        { console.log(data)
+        { console.log(data, "line 21 routerJS")
             res.json(data)})
         .catch((err) => res.status(500).json(err))
     }

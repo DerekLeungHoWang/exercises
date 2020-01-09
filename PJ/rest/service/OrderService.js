@@ -2,8 +2,8 @@ const fs = require('fs');
 
 
 class OrderService{
-    constructor(file){
-        this.file = file;
+    constructor(knex){
+        this.knex = knex;
     }
 
     
@@ -32,9 +32,26 @@ class OrderService{
     }
 
     list(user){
-        console.log(user, "line 10 orderService");
-    
-        return this.read(user)
+        console.log(typeof user, "line 10 list function running orderService");
+        if(typeof user !== undefined){
+            let query = this.knex.select('orders.id','orders.content','orders.price')
+            .from('orders')
+            .innerJoin('users','orders.user_id', 'users.id')
+            .where('users.username', user)
+            .orderBy('orders.id', 'asc') 
+            
+            console.log('line 43 orderservice');
+            
+            return query.then((rows)=>{
+                console.log(rows, 'line 39 noterservice JS');
+                return rows.map(row=>({
+                    id: row.id,
+                    content: row.content,
+                    price:row.price
+                }));  
+            });
+        }
+        
     }
 
     add(newOrder,user){

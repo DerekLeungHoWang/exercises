@@ -25,15 +25,17 @@ app.use(express.static("public"));
 
 //basic-auth
 app.use(basicAuth({
-    authorizer: AuthChallenger(JSON.parse(fs.readFileSync(path.join(__dirname, config.users)))), // we are defining the file where our users exist with this code: JSON.parse(fs.readFileSync(path.join(__dirname, config.users))), we also parse the data so that we can iterate over each user like a JavaScript variable/ object. 
+    authorizer: AuthChallenger(knex),
     challenge: true,
-    realm: 'Food Application',
-
+    authorizeAsync: true,
+    realm: 'Restaurant Application With Knex'
 }));
 
 
 //routing
-const orderService = new OrderService(path.join(__dirname, config.orders));
+const orderService = new OrderService(knex);
+
+
 console.log("LINE34, app.js");
 console.log(path.join(__dirname, config.orders));
 app.use('/api/orders', new OrderRouter(orderService).router());
