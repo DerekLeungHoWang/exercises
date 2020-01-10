@@ -101,23 +101,23 @@ $(document).ready(function () {
 
   $('.add-to-cart-btn').click(function (event) {
   event.preventDefault()
-  
+console.log($('#sixty').html());
 
     console.log(event.target);
-    var val = event.target.id
-
-    console.log(val);
-      addToCart(val)
+    var valProduct = event.target.id;
+    
+    console.log(valProduct);
+      addToCart(valProduct)
   });
 });
 
 
-function addToCart(val) {
+function addToCart(valProduct) {
   event.preventDefault();
 
 
   axios.post('/api/orders',{
-    order: val
+    order: valProduct
   }).then((res)=>{
     console.log("LINE 77 controller.js");
     

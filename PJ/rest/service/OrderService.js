@@ -38,8 +38,7 @@ class OrderService{
             .from('orders')
             .innerJoin('users','orders.user_id', 'users.id')
             .where('users.username', user)
-            .orderBy('orders.id', 'asc') 
-            
+          
             console.log('line 43 orderservice');
             
             return query.then((rows)=>{
@@ -58,15 +57,23 @@ class OrderService{
         console.log('add function running ?????????????????????????');
         console.log(newOrder,user);
         console.log(this.orders, 'line 43 ===========>>>>>');
-        console.log(this.orders[user]);
-        if(typeof this.orders[user] === 'undefined'){
-            console.log('the user is undefined');
-            
-            this.orders[user] = [];
-     } this.orders[user].push(newOrder)
-        console.log(this.orders[user],"after push");
+        let query = this.knex
+        .select('id')
+        .from('users')
+        .where('users.username', user);
         
-        return this.write();
+
+            return query.then((rows)=>{
+               console.log(rows[0].id);
+               return this.knex.insert({
+                content:newOrder,
+                user_id: rows[0].id
+                
+            }).into('orders')
+                
+            })
+
+
     }
 
     write(){

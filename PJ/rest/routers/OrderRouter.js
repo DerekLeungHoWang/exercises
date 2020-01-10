@@ -26,6 +26,8 @@ class OrderRouter{
     post(req, res){
         console.log(req.body.order) // value is from axios.post in controller.js
         console.log(req.auth.user, 'line 28 orderRouter.js');
+        console.log("LINE29 ROUTERJS checking req.body");
+        console.log(req.body);
         
          this.orderService.add(req.body.order, req.auth.user)
 
