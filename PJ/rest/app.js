@@ -41,6 +41,10 @@ console.log(path.join(__dirname, config.orders));
 app.use('/api/orders', new OrderRouter(orderService).router());
 
 app.get('/',(req,res)=>{
+    res.render("index");
+})
+
+app.get('/pizza',(req,res)=>{
     res.render("pizzaIndex");
 })
 
