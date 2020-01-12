@@ -1,14 +1,10 @@
 /*===============NAVBAR=================*/
 /*===============ICON=================*/
-.fa-running{
-  font-size: 300%;
-  margin-left: 150px;
-  padding: 30px;
-  border: solid 5px #000;
+/*===============ABOUT BEGIN=================*/
+#aboutPage{
+  color: #000 !important;
 }
-.icon-border{
-  
-}
+/*===============ABOUT END=================*/
 
 /*===============HEADER-START  STATNUM=================*/
 .notebook-hero {
@@ -482,3 +478,22 @@ margin-right: 5px;
 }
 }
 
+
+
+/*========controllable image transition BEGIN  ==========*/
+#three-container{
+  margin-right: 100px !important;
+  
+}
+
+#imgTran{
+ 
+  
+}
+
+canvas {
+	background-image: radial-gradient(rgb(255, 255, 255), rgb(255, 255, 255));
+  width: 800px !important;
+  height: 400px !important;
+ 
+}

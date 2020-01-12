@@ -47,6 +47,10 @@ app.get('/',(req,res)=>{
 app.get('/pizza',(req,res)=>{
     res.render("pizzaIndex");
 })
+app.get('/about',(req,res)=>{
+    res.render("about");
+})
+
 
 app.get('/cart',(req,res)=>{
     res.render("cart");
@@ -55,6 +59,8 @@ app.get('/cart',(req,res)=>{
 app.get('/contact',(req,res)=>{
     res.render("contact");
 })
+
+
 
 app.post('/')
 
