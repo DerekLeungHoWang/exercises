@@ -12,15 +12,13 @@ module.exports = (express) => {
         res.redirect('/login'); // or redirect to '/signup'
     }
 
-
     router.get('/secret',  isLoggedIn, (req, res) => {
-        res.send('Here you go, a secret');
+        console.log(req.session.passport.user.id)
+        console.log('hello')
+        res.send(`Here you go a secret`);
     });
 
-    router.get('/login', (req, res) => {
-        res.sendFile(__dirname + '/html/login.html');
-    });
-
+ 
     router.post('/login', passport.authenticate('local-login', {
         successRedirect: '/',
         failureRedirect: '/error'
@@ -33,13 +31,28 @@ module.exports = (express) => {
     router.get('/', (req, res) => {
         res.sendFile(__dirname + '/html/index.html');
     });
+
+   router.get('/login', (req, res) => {
+        res.sendFile(__dirname + '/html/login.html');
+    });
+
     router.get('/signup', (req, res) => {
         res.sendFile(__dirname + '/html/signup.html');
     });
     
     router.post('/signup', passport.authenticate('local-signup', {
-        successRedirect: '/',
+        successRedirect: '/secret',
         failureRedirect: '/error'
+    }));
+
+    router.get("/auth/facebook", passport.authenticate('facebook', {scope: ["email", "user_gender","user_link" ]}));
+
+    router.get("/auth/facebook/callback", passport.authenticate('facebook',{
+
+        successRedirect: "/secret",
+
+        failureRedirect: "/login"
+
     }));
 
     return router;

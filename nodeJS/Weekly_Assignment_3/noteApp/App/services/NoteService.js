@@ -74,7 +74,7 @@ class NoteService{
         .where('users.username', user);
 
             return query.then((rows) =>{
-                ifrows.length ===1){
+                if(rows.length ===1){
                     return this.knex('notes')
                     .where('id',id)
                     .del()
