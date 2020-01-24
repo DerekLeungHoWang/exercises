@@ -72,7 +72,7 @@ app.get('/cart/checkout',(req,res)=>{
 app.post('/')
 
 
-app.listen(config.port, ()=> console.log('listening at 8080')
+app.listen(config.port, ()=> console.log('listening at 3000rs')
 )
 
 module.exports = app;

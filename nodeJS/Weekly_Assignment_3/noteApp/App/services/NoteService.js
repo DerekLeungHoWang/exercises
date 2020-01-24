@@ -44,10 +44,7 @@ class NoteService{
                 });
             }
         }
-    
 
-    
-    
     update(id, note, user){
         let query = this.knex
         .select('id')
