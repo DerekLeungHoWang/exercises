@@ -19,6 +19,8 @@ var notesTemplate = Handlebars.compile(
 
 const reloadNotes = (RESDATA) => {
   console.log(notes,"line14 notes. js");
+  
+  
   $("#notes").html(notesTemplate({ someNotes: RESDATA }));
 };
 
