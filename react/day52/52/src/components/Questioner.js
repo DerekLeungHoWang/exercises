@@ -1,26 +1,32 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Questioner extends Component {
+// Exercise A
+class Questioner extends React.Component {
   constructor(props) {
     super(props);
-    this.ask = this.ask.bind(this);
-
-    this.state = { answer: "" };
+    this.state = {
+      answer: ""
+    };
   }
 
-  ask() {
-    const answer = prompt(this.props.question);
-    this.setState(state => ({
-      answer: answer
-    }));
-  }
+  query = () => {
+    const userInput = prompt(this.props.question);
+    if (userInput !== null) {
+      this.setState({
+        answer: userInput
+      });
+    }
+    return;
+  };
 
   render() {
     return (
-      <>
-        <button onClick={this.ask}>Click me!</button>
+      <div>
+        <button className="promptBox" onClick={this.query}>
+          Questioner
+        </button>
         <p>{this.state.answer}</p>
-      </>
+      </div>
     );
   }
 }

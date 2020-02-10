@@ -1,5 +1,6 @@
 import React from "react";
 import Clock from "./components/Clock";
+import { Home } from "./components/Home";
 
 function App() {
   const clocks = [
@@ -10,14 +11,16 @@ function App() {
 
   return (
     <>
+      <Home />
+      <div>hello</div>
       {clocks.map(item => {
-        return <Clock location={item.location} 
-        key = {item.location}
-        
-        timezone={item.timezone}
-        
-        
-        />;
+        return (
+          <Clock
+            location={item.location}
+            key={item.location}
+            timezone={item.timezone}
+          />
+        );
       })}
     </>
   );
