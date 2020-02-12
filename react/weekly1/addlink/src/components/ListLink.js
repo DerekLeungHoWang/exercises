@@ -46,8 +46,7 @@ export default class ListLink extends Component {
 
     return (
       <div className='link'>
-      
-        <AddLink addLink={this.addLink} />
+        <AddLink addLink={this.addLink} buttonLabel='Click to add' />
         {dataList}
       </div>
     )

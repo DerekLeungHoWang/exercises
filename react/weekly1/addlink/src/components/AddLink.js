@@ -48,7 +48,6 @@ class AddLink extends React.Component {
           />
         </FormGroup>
         <Button color='danger' onClick={this.toggle}>
-          Add
           {this.props.buttonLabel}
         </Button>
 

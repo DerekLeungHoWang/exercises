@@ -1,17 +1,16 @@
-import React from 'react';
-import {Route } from 'react-router-dom'
+import React from 'react'
+import { Route } from 'react-router-dom'
 
-function Home(){
+function Home () {
   return <div>Home Page</div>
 }
- 
 
-function App() {
+function App () {
   return (
-    <div className="App">
-          <Route path="/" component={Home}/>
+    <div className='App'>
+      <Route path='/' component={Home} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
